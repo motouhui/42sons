@@ -16,9 +16,33 @@ package GGM.skin
 		private static const button:Class;
 		public static const button_bitmapdata:BitmapData = new button().bitmapData;
 		
-		[Embed(source="../../../resource/field.jpg")]
+		[Embed(source="../../../resource/bg.png")]
 		private static const field:Class;
 		public static const field_bitmapdata:BitmapData = new field().bitmapData;
+		
+		[Embed(source="../../../resource/cursor.png")]
+		private static const cursor:Class;
+		public static const cursor_bitmapdata:BitmapData = new cursor().bitmapData;
+		
+		[Embed(source="../../../resource/shadow.png")]
+		private static const shadow:Class;
+		public static const shadow_bitmapdata:BitmapData = new shadow().bitmapData;
+		
+		[Embed(source="../../../resource/grass01.png")]
+		private static const grass01:Class;
+		public static const grass01_bitmapdata:BitmapData = new grass01().bitmapData;
+		
+		[Embed(source="../../../resource/grass02.png")]
+		private static const grass02:Class;
+		public static const grass02_bitmapdata:BitmapData = new grass02().bitmapData;
+		
+		[Embed(source="../../../resource/rock01.png")]
+		private static const rock01:Class;
+		public static const rock01_bitmapdata:BitmapData = new rock01().bitmapData;
+		
+		[Embed(source="../../../resource/rock02.png")]
+		private static const rock02:Class;
+		public static const rock02_bitmapdata:BitmapData = new rock02().bitmapData;
 		
 		[Embed(source="../../../resource/tree.png")]
 		private static const tree:Class;

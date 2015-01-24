@@ -116,12 +116,11 @@ package
             trace("getFriendsResult");
 			printObject(e.result);
 			var arr:Array = new Array();
-			var map:Object = new Object();
 			while (arr.length < NUMBER_OF_PLAYERS / 2) {
 				var idx:int = randomNumber(0, e.result.ids.length - 1);
 				var uid:String = e.result.ids[idx];
-				if (!map[uid]) { // distinct
-					map[uid] = true
+				if (!_uidMap[uid]) { // distinct
+					_uidMap[uid] = true
 					arr.push(uid);
 				}
 			}
