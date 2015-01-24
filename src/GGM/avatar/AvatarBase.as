@@ -12,6 +12,8 @@ package GGM.avatar
 	import Person.CalmPerson;
 	import Person.CrazyAttackPerson;
 	import Person.IPerson;
+	import Person.Person;
+	import Person.Step;
 	import Person.TimidPerson;
 	
 	import morn.core.components.Label;
@@ -137,6 +139,12 @@ package GGM.avatar
 				}
 					break;
 			}
+		}
+		
+		private var _step:Person.Step = new Person.Step();
+		public function get Step():Person.Step
+		{
+			return this._step;
 		}
 		
 		/**
