@@ -235,7 +235,7 @@ package Person
 				if (_persons.length == Util.Constants.MAX_ALLIANCE_MEMBERS + 1) {
 					var minindex:int = -1;
 					var minpower:int = int.MAX_VALUE;
-					for(var i:int = 1; i < _persons.length; i++) {
+					for(var i:int = 0; i < _persons.length; i++) {
 						if (minpower > _persons[i].getPower() && _persons[i].isHero() == false) {
 							minindex = i;
 							minpower = _persons[i].getPower();
