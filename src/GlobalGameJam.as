@@ -73,6 +73,9 @@ package
 		 */		
 		private var _lblWin:Label;
 		
+		private var _weiboMe:Object;
+		private var _weiboPlayers:Array;
+		
 		public function GlobalGameJam()
 		{
 			App.init(this);
@@ -93,8 +96,17 @@ package
 			
 			_mapSpr.y = _playerInfo.y + _playerInfo.height;
 			
+			// 拉取微博数据
+			var chaos:Chaos = new Chaos(genesisCallback);
+		}
+		
+		private function genesisCallback(hero, players:Array):void
+		{
+			_weiboMe = hero;
+			_weiboPlayers = players
+			
 			//初始化数据
-			initData();
+			initData(players);
 			
 			
 			App.stage.addEventListener(KeyboardEvent.KEY_DOWN,_pushKeyHandler);
@@ -134,7 +146,7 @@ package
 		 * 初始化数据 
 		 * 
 		 */		
-		private function initData():void
+		private function initData(args:Array):void
 		{
 			//刷新边界
 			refreshRange(800,550);
@@ -157,14 +169,16 @@ package
 			
 			_mapSpr.filters = null;
 			_mapSpr.addChild(_hero);
-			
-			for(i = 0 ;i < 200; i++)
+
+			for each(var group:Object in args)
 			{
+				trace(group.avatar, group.speed, group.type, group.name);
+
 				var player:AvatarBase = new AvatarBase(
-					AvatarSkin.AVATAR_LIST[i % 45],
-					int(Math.random()*5 + 1),
-					AvatarBase.PERSON_TYPE_CRAZY_ATTACK,
-					"刘德华"+i,
+					AvatarSkin.AVATAR_LIST[group.avatar],
+					group.speed,
+					group.type,
+					group.name,
 					24,36
 				);
 				
@@ -281,7 +295,7 @@ package
 			
 			_lblWin.visible = false;
 			
-			initData();
+			initData(_weiboPlayers);
 		}
 		
 		protected function _enterFrameHandler(event:Event):void
