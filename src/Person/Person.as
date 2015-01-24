@@ -24,6 +24,19 @@ package Person
 		private var _endurance:int;
 		private var _life:int;
 		
+		private var _name:String = null;
+		
+		public function getName():String
+		{
+			return this._name;
+		}
+		
+		public function setName(name:String):IPerson
+		{
+			this._name = name;
+			return this;
+		}
+		
 		private var _bitmap:BitmapData = null;
 		
 		public function setBitmapData(bitmap:BitmapData):IPerson 

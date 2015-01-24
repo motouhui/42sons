@@ -86,7 +86,7 @@ package GGM.avatar
 			this.txtUserName = new Label(this.nickName);
 			this.txtUserName.color = 0xff0000;
 			this.txtUserName.size = 12;
-			this.txtUserName.filters = [new GlowFilter(0x00ff00)];
+			this.txtUserName.filters = [new GlowFilter(0xffff00)];
 			this.addChild(this.txtUserName);
 			this.txtUserName.y = this.avatar.y - this.txtUserName.height;
 			this.txtUserName.x = (avatar.width - this.txtUserName.width)>>1;
@@ -109,6 +109,8 @@ package GGM.avatar
 			_agreeIcon.x = this.avatar.width/2;
 			_agreeIcon.y = _userHpBar.y - _agreeIcon.height;
 			
+			this.perData.setBitmapData(res);
+			this.perData.setName(nickName);
 		}
 		
 		/**

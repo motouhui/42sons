@@ -4,6 +4,8 @@ package
     import com.sina.microblog.events.MicroBlogErrorEvent;
     import com.sina.microblog.events.MicroBlogEvent;
     
+    import flash.system.Security;
+    
     import GGM.avatar.AvatarBase;
     
     public class Chaos
@@ -22,6 +24,8 @@ package
         
         public function Chaos(callback:Function)
         {
+			Security.loadPolicyFile("http://api.t.sina.com.cn/crossdomain.xml");
+			
 			_afterGenesisCallback = callback;
 			
             _mb.consumerKey = "1621585982"; //申请的App Key

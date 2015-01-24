@@ -113,26 +113,7 @@ package GGM.util
 					}
 					
 					var firPer:AvatarBase = _playerList[i];
-					//					//已经阵亡，无需计算
-					//					if(!firPer.perData.isLive())
-					//					{
-					//						continue;
-					//					}
 					var secPer:AvatarBase = _playerList[j];
-					//					
-					//					if(!secPer.perData.isLive())
-					//					{
-					//						continue;
-					//					}
-					//					
-					//					//判断是否结盟了
-					//					var isAlign:Boolean = false;
-					//					
-					//					//其中一个人已经加入团队要被删除，后面的人不需要再跟他比对了
-					//					if(firPer._delType == AvatarBase.DEL_CAZ_JOIN_TEAM || secPer._delType == AvatarBase.DEL_CAZ_JOIN_TEAM)
-					//					{
-					//						continue;
-					//					}
 					//如果当前两个玩家的关系是处于未知状态
 					if(_playerToPlayerDict[firPer.nickName + "_" + secPer.nickName] == PlayerBattleUtil.STATE_UNKOWN)
 					{
@@ -148,6 +129,16 @@ package GGM.util
 									firPer.nickName,
 									secPer.nickName,
 									PlayerBattleUtil.STATE_FRIENDLY);
+								
+								if(firPer != _hero)
+								{
+									firPer.changeState(PlayerBattleUtil.STATE_FRIENDLY);
+								}
+								
+								if(secPer != _hero)
+								{
+									secPer.changeState(PlayerBattleUtil.STATE_FRIENDLY);
+								}
 							}
 							else
 							{
@@ -156,6 +147,16 @@ package GGM.util
 									firPer.nickName,
 									secPer.nickName,
 									PlayerBattleUtil.STATE_BATTLE);
+								
+								if(firPer != _hero)
+								{
+									firPer.changeState(PlayerBattleUtil.STATE_BATTLE);
+								}
+								
+								if(secPer != _hero)
+								{
+									secPer.changeState(PlayerBattleUtil.STATE_BATTLE);
+								}
 							}
 						}
 					}
