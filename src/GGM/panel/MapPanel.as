@@ -12,10 +12,10 @@ package GGM.panel
 	 */	
 	public class MapPanel extends Sprite
 	{
-		private static var NUMBER_OF_GRASS_1:Number = 50;
-		private static var NUMBER_OF_GRASS_2:Number = 50;
-		private static var NUMBER_OF_ROCK_1:Number = 50;
-		private static var NUMBER_OF_ROCK_2:Number = 50;
+		private static var NUMBER_OF_GRASS_1:Number = 100;
+		private static var NUMBER_OF_GRASS_2:Number = 120;
+		private static var NUMBER_OF_ROCK_1:Number = 30;
+		private static var NUMBER_OF_ROCK_2:Number = 60;
 		
 		public function MapPanel()
 		{

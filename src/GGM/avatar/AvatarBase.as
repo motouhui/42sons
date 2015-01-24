@@ -6,6 +6,7 @@ package GGM.avatar
 	import flash.filters.GlowFilter;
 	
 	import GGM.panel.UserHpBar;
+	import GGM.skin.GameSkin;
 	
 	import Person.Alliance;
 	import Person.CalmPerson;
@@ -46,6 +47,8 @@ package GGM.avatar
 		 */
 		public static const PERSON_TYPE_TIMID:String = "PERSON_TYPE_TIMID";
 		
+		
+		
 		public function AvatarBase(res:BitmapData,moveStep:int,type:String,nickName:String,width:int = -1,height:int = -1)
 		{
 			avatar = new Bitmap(res);
@@ -65,6 +68,11 @@ package GGM.avatar
 			this.addChild(avatar);
 			
 			this.perType = type;
+			
+			//阴影图标
+			_shadowIcon = new Bitmap();
+			_shadowIcon.visible = false;
+			this.addChild(_shadowIcon);
 			
 			//判断人物类型
 			_checkType(type);
@@ -186,6 +194,11 @@ package GGM.avatar
 		 */		
 		private var _refusalIcon:Bitmap;
 		
+		/**
+		 * 脚底阴影 
+		 */		
+		private var _shadowIcon:Bitmap;
+		
 		
 		/**
 		 * 是否是个团队 
@@ -248,10 +261,17 @@ package GGM.avatar
 			this.perData.setPower(data.power);
 			this.perData.setSpeed(data.speed);
 			this.perData.setBattleLust(data.lust);
-			if(data.isHero)
-			{
+			if(data.isHero) {
 				this.perData.setHero();
+				_shadowIcon.bitmapData = GameSkin.cursor_bitmapdata;
+			} else {
+				_shadowIcon.bitmapData = GameSkin.shadow_bitmapdata;
 			}
+			_shadowIcon.visible = true;
+			_shadowIcon.width = 28;
+			_shadowIcon.height = 12;
+			_shadowIcon.x = (this.avatar.width - _shadowIcon.width) / 2;
+			_shadowIcon.y = this.avatar.height - _shadowIcon.height /2 ;
 		}
 		
 		public function updatehpBar():void
