@@ -4,11 +4,13 @@ package
     import com.sina.microblog.events.MicroBlogErrorEvent;
     import com.sina.microblog.events.MicroBlogEvent;
     
+    import flash.system.Security;
+    
     import GGM.avatar.AvatarBase;
     
     public class Chaos
     {
-		private static const NUMBER_OF_PLAYERS:int = 42;
+		private static const NUMBER_OF_PLAYERS:int = 10;
 		
         private var _mb:MicroBlog = new MicroBlog();
 		private var _uidMap:Object = new Object(); // 临时存放微博用户id的哈希表，用来去重
@@ -22,6 +24,8 @@ package
         
         public function Chaos(callback:Function)
         {
+			Security.loadPolicyFile("http://api.t.sina.com.cn/crossdomain.xml");
+			
 			_afterGenesisCallback = callback;
 			
             _mb.consumerKey = "1621585982"; //申请的App Key

@@ -5,7 +5,11 @@ package GGM.panel
 	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	
+	import GGM.avatar.AvatarBase;
 	import GGM.skin.GameSkin;
+	
+	import Person.Alliance;
+	import Person.IPerson;
 
 	/**
 	 * 用户信息面板 
@@ -29,7 +33,7 @@ package GGM.panel
 			avatar.height = 50;
 			
 			hpBar = new ProcessBar(100);
-			this.addChild(hpBar);
+//			this.addChild(hpBar);
 			
 			hpBar.x = avatar.width;
 			hpBar.y = 3;
@@ -38,14 +42,27 @@ package GGM.panel
 			
 			noticePanel = new NoticePanel();
 			
-			noticePanel.x = 400;
+			noticePanel.x = 350;
+			noticePanel.y = 10;
 			this.addChild(noticePanel);
 			
 			leftPlayerTxt = new TextField();
 			this.addChild(leftPlayerTxt);
 			leftPlayerTxt.x = hpBar.x + hpBar.width + 10;
 			leftPlayerTxt.filters = [new GlowFilter(0)]
-			leftPlayerTxt.y = 3;
+			leftPlayerTxt.y = 30;
+			leftPlayerTxt.x = 750 ;
+			
+			_teamInfoList = new Vector.<AvatarInfo>(3,true);
+			
+			for(var i:int =0 ;i < _teamInfoList.length ; i++)
+			{
+				_teamInfoList[i] = new AvatarInfo();
+				_teamInfoList[i].visible = false;
+				this.addChild(_teamInfoList[i]);
+			}
+			
+			
 		}
 		
 		/**
@@ -73,6 +90,11 @@ package GGM.panel
 		 */		
 		private var leftPlayerTxt:TextField;
 		
+		/**
+		 * 队伍人物数据 
+		 */		
+		private var _teamInfoList:Vector.<AvatarInfo>;
+		
 		override public function get height():Number
 		{
 			return _bg.height;
@@ -98,5 +120,34 @@ package GGM.panel
 		{
 			leftPlayerTxt.htmlText = "<font size='12' color='#ffffff'>left:</font><font size='12' color='#00ff00'>" + val + "</font>"
 		}
+		
+		/**
+		 * 更新 队伍列表数据
+		 * @param hero
+		 * 
+		 */		
+		public function updateTeamList(hero:AvatarBase):void
+		{
+			if(hero.perData is Alliance)
+			{
+				var data:Vector.<IPerson> = Alliance(hero.perData).getMembers();
+				
+				for(var i:int = 0 ; i < _teamInfoList.length;i++)
+				{
+					if(i >= data.length)
+					{
+						_teamInfoList[i].visible = false;
+					}
+					else
+					{
+						_teamInfoList[i].setData(data[i]);
+						_teamInfoList[i].visible = true;
+						_teamInfoList[i].x = i* (_teamInfoList[i].width + 5);
+						_teamInfoList[i].y = 0;
+					}
+				}
+			}
+		}
+		
 	}
 }

@@ -29,7 +29,7 @@ package GGM.panel
 			mTxtVal = new Label();
 			mTxtVal.y = -4;
 			mTxtVal.color = 0xffffff;
-			mTxtVal.width = 100;
+			mTxtVal.width = 50;
 			mTxtVal.height = 20;
 			mTxtVal.align = TextFormatAlign.CENTER;
 			
@@ -61,17 +61,19 @@ package GGM.panel
 		{
 			mNowSpr.graphics.clear();
 			mNowSpr.graphics.beginFill(0xff0000);
-			mNowSpr.graphics.drawRoundRect(0,0,val,10,6,6);
+			mNowSpr.graphics.drawRoundRect(0,0,val/2,10,6,6);
 			mNowSpr.graphics.endFill();
 			
 			if(val > this.mMaxVal)
 			{
 				this.mMaxVal = val;
+				
+				this.mTxtVal.width = this.mMaxVal/2;
 			}
 			
 			this.graphics.clear();
 			this.graphics.beginFill(0);
-			this.graphics.drawRoundRect(0,0,mMaxVal,10,6,6);
+			this.graphics.drawRoundRect(0,0,mMaxVal/2,10,6,6);
 			this.graphics.endFill();
 			
 			mTxtVal.text = val+ "/" + this.mMaxVal;
@@ -82,8 +84,10 @@ package GGM.panel
 			this.mMaxVal = 100;
 			this.graphics.clear();
 			this.graphics.beginFill(0);
-			this.graphics.drawRoundRect(0,0,mMaxVal,10,6,6);
+			this.graphics.drawRoundRect(0,0,mMaxVal/2,10,6,6);
 			this.graphics.endFill();
+			
+			this.mTxtVal.width = this.mMaxVal/2;
 		}
 	}
 }
