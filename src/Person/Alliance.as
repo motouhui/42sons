@@ -236,7 +236,7 @@ package Person
 					var minindex:int = 0;
 					var minpower:int = _persons[0].getPower();
 					for(var i:int = 1; i < _persons.length; i++) {
-						if (minpower > _persons[i].getPower()) {
+						if (minpower > _persons[i].getPower() && _persons[i].isHero() == false) {
 							minindex = i;
 							minpower = _persons[i].getPower();
 						}
@@ -347,23 +347,22 @@ package Person
 			if (x >= 0) {
 				var i:int;
 				for (i = 0; i < this._persons.length && x > 0; i++) {
-					this._persons[i].setDead();
-					x--;
+					if (this._persons[i].isHero() == false) {
+						this._persons[i].setDead();
+						x--;
+					}
 				}
-				if (i == this._persons.length) {
-					this.setDead();
-				} else {
-					this._persons.sort(function(person1:IPerson, person2:IPerson):int {
-						return person1.getLife() - person2.getLife();
-					});
-					while(this._persons.length > 0) {
-						if(!this._persons[0].isLive())
-						{
-							var person:IPerson = this._persons.shift();
-							person.setDead();
-						} else {
-							break;
-						}
+				
+				this._persons.sort(function(person1:IPerson, person2:IPerson):int {
+					return person1.getLife() - person2.getLife();
+				});
+				while(this._persons.length > 0) {
+					if(!this._persons[0].isLive())
+					{
+						var person:IPerson = this._persons.shift();
+						person.setDead();
+					} else {
+						break;
 					}
 				}
 			}
