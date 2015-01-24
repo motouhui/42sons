@@ -65,14 +65,14 @@ package GGM.avatar
 			
 			this.moveStep = moveStep;
 			
-			this.addChild(avatar);
-			
-			this.perType = type;
-			
 			//阴影图标
 			_shadowIcon = new Bitmap();
 			_shadowIcon.visible = false;
 			this.addChild(_shadowIcon);
+			
+			this.addChild(avatar);
+			
+			this.perType = type;
 			
 			//判断人物类型
 			_checkType(type);
