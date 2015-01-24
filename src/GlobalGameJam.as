@@ -175,7 +175,7 @@ package
 			
 			_playerList = new Vector.<AvatarBase>();
 			
-			_hero.filters = [new GlowFilter(0x00ff00)];
+//			_hero.filters = [new GlowFilter(0x00ff00)];
 			
 			_mapSpr.filters = null;
 			_mapSpr.addChild(_hero);
@@ -497,7 +497,7 @@ package
 				LOOK_AT_RANGE);
 			
 			spr.graphics.endFill();
-			//			_mapSpr.drawMask(spr);
+			_mapSpr.drawMask(spr);
 		}
 	}
 }
