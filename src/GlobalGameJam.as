@@ -345,34 +345,7 @@ package
 				//刷新人物的移动范围
 				for each( var player:AvatarBase in _playerList)
 				{
-					var rand:int = Math.random() * 4;
-					switch(rand)
-					{
-						case 0:
-						{
-							AvatarMoveUtil.getPlayerMovePoint(
-								player,"up");
-						}
-							break;
-						case 1:
-						{
-							AvatarMoveUtil.getPlayerMovePoint(
-								player,"down");
-						}
-							break;
-						case 2:
-						{
-							AvatarMoveUtil.getPlayerMovePoint(
-								player,"left");
-						}
-							break;
-						case 3:
-						{
-							AvatarMoveUtil.getPlayerMovePoint(
-								player,"right");
-						}
-							break;
-					}
+					AvatarMoveUtil.getPlayerMovePoint2(player);
 				}
 			}
 			//判断人物关系进行更新
