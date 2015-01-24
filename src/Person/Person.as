@@ -78,7 +78,7 @@ package Person
 		
 		public function setHero():IPerson
 		{
-			this._ishero = false;
+			this._ishero = true;
 			return this; 
 		}
 		
