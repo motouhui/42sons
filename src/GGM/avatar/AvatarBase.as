@@ -83,6 +83,8 @@ package GGM.avatar
 			this.txtUserName.y = this.avatar.y - this.txtUserName.height;
 			this.txtUserName.x = (avatar.width - this.txtUserName.width)>>1;
 			
+			txtUserName.toolTip = "nickName:" +  this.nickName + "\n Power:" + perData.getPower();
+			
 			_userHpBar = new UserHpBar(10);
 			this.addChild(_userHpBar);
 			this._userHpBar.x = (avatar.width - this._userHpBar.width)>>1;

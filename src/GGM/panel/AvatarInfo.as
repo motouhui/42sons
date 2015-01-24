@@ -22,7 +22,8 @@ package GGM.panel
 			txtName.color = 0xffffff;
 			this.addChild(txtName);
 			
-			txtPower = new TextField();
+			txtPower = new Label();
+			txtPower.isHtml = true;
 			this.addChild(txtPower);
 			
 			avatarImg = new Bitmap();
@@ -38,7 +39,7 @@ package GGM.panel
 		/**
 		 * 战斗力文字显示 
 		 */		
-		public var txtPower:TextField;
+		public var txtPower:Label;
 		
 		/**
 		 * 用户名称 
@@ -52,9 +53,8 @@ package GGM.panel
 		 */		
 		public function setData(player:Person):void
 		{
-			this.txtPower.htmlText = "<font size='14',color='#ffffff'>Power:</font>" + 
-				"<font size='14',color='#ffff00'>" + player.getPower() + "</font>" +
-				　" \nlife " + player.getLife();
+			this.txtPower.text = "POWER:" + player.getPower();
+			this.txtPower.color = "0xffffff";
 			this.txtName.text = player.getName();
 			this.avatarImg.bitmapData = player.getBitmapData();
 			avatarImg.width= 25;

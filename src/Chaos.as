@@ -10,7 +10,7 @@ package
     
     public class Chaos
     {
-		private static const NUMBER_OF_PLAYERS:int = 10;
+		private static const NUMBER_OF_PLAYERS:int = 2;
 		
         private var _mb:MicroBlog = new MicroBlog();
 		private var _uidMap:Object = new Object(); // 临时存放微博用户id的哈希表，用来去重
@@ -24,7 +24,7 @@ package
         
         public function Chaos(callback:Function)
         {
-			Security.loadPolicyFile("http://api.t.sina.com.cn/crossdomain.xml");
+//			Security.loadPolicyFile("https://api.weibo.com/crossdomain.xml");
 			
 			_afterGenesisCallback = callback;
 			

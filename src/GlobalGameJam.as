@@ -95,13 +95,6 @@ package
 			_weiboMe = hero;
 			_weiboPlayers = players
 			
-			_hero = new AvatarBase(
-				AvatarSkin.AVATAR_LIST[_weiboMe.avatar],
-				_weiboMe.speed,
-				_weiboMe.type,
-				_weiboMe.name,
-				24,36
-			);
 			
 			_keyDownDict = new Dictionary();
 			
@@ -117,8 +110,6 @@ package
 			//初始化数据
 			initData(players);
 			
-			//初始化玩家战斗类
-			_playerBattleUtil = new PlayerBattleUtil(_hero,this._playerInfo,this.playGameOver);
 			
 			App.stage.addEventListener(KeyboardEvent.KEY_DOWN,_pushKeyHandler);
 			App.stage.addEventListener(KeyboardEvent.KEY_UP,_keyUphandler);
@@ -178,6 +169,18 @@ package
 			_playerList = new Vector.<AvatarBase>();
 			
 //			_hero.filters = [new GlowFilter(0x00ff00)];
+			
+			
+			_hero = new AvatarBase(
+				AvatarSkin.AVATAR_LIST[_weiboMe.avatar],
+				_weiboMe.speed,
+				_weiboMe.type,
+				_weiboMe.name,
+				24,36
+			);
+			
+			//初始化玩家战斗类
+			_playerBattleUtil = new PlayerBattleUtil(_hero,this._playerInfo,this.playGameOver);
 			
 			_mapSpr.filters = null;
 			_mapSpr.addChild(_hero);
@@ -240,6 +243,8 @@ package
 			_playerInfo.refreshMaxHp();
 			
 			_playerInfo.setLeftPerson(_playerList.length + 1);
+			
+			_playerInfo.updateTeamList(_hero);
 		}
 		
 		/**
@@ -420,9 +425,9 @@ package
 				if(avatar._delType == AvatarBase.DEL_CAZ_DIE)
 				{
 					_playerInfo.noticePanel.addNotice(
-						"player<font size='14' color='#0xffffff'>" + 
+						"player<font size='14' color='#ffffff'>" + 
 						avatar.nickName + 
-						"</font> killed by <font size='14' color='#0xffffff'>" + avatar.killByWho + "</font>");
+						"</font> killed by <font size='14' color='#ffffff'>" + avatar.killByWho + "</font>");
 				}
 				
 				avatar = null;

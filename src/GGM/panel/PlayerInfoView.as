@@ -43,7 +43,7 @@ package GGM.panel
 			noticePanel = new NoticePanel();
 			
 			noticePanel.x = 350;
-			noticePanel.y = 10;
+			noticePanel.y = 20;
 			this.addChild(noticePanel);
 			
 			leftPlayerTxt = new TextField();
@@ -128,11 +128,12 @@ package GGM.panel
 		 */		
 		public function updateTeamList(hero:AvatarBase):void
 		{
+			var i:int;
 			if(hero.perData is Alliance)
 			{
 				var data:Vector.<IPerson> = Alliance(hero.perData).getMembers();
 				
-				for(var i:int = 0 ; i < _teamInfoList.length;i++)
+				for(i = 0 ; i < _teamInfoList.length;i++)
 				{
 					if(i >= data.length)
 					{
@@ -141,6 +142,23 @@ package GGM.panel
 					else
 					{
 						_teamInfoList[i].setData(data[i]);
+						_teamInfoList[i].visible = true;
+						_teamInfoList[i].x = i* (_teamInfoList[i].width + 5);
+						_teamInfoList[i].y = 0;
+					}
+				}
+			}
+			else
+			{
+				for(i = 0 ; i < _teamInfoList.length;i++)
+				{
+					if(i >= 1)
+					{
+						_teamInfoList[i].visible = false;
+					}
+					else
+					{
+						_teamInfoList[i].setData(hero.perData);
 						_teamInfoList[i].visible = true;
 						_teamInfoList[i].x = i* (_teamInfoList[i].width + 5);
 						_teamInfoList[i].y = 0;
