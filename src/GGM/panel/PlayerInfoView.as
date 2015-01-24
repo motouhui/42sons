@@ -83,7 +83,13 @@ package GGM.panel
 		
 		public function setNowHp(val:int):void
 		{
+//			trace(val);
 			this.hpBar.setNowVal(val < 0?0:val);
+		}
+		
+		public function refreshMaxHp():void
+		{
+			this.hpBar.refreshMaxVal();
 		}
 		
 		/**

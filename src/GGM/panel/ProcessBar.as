@@ -15,42 +15,42 @@ package GGM.panel
 		
 		public function ProcessBar(maxVal:int)
 		{
-			this._maxVal = maxVal;
+			this.mMaxVal = maxVal;
 			
 			this.graphics.beginFill(0);
 			this.graphics.drawRoundRect(0,0,maxVal,10,6,6);
 			this.graphics.endFill();
 			
-			_nowSpr = new Sprite();
+			mNowSpr = new Sprite();
 			
-			this.addChild(_nowSpr);
+			this.addChild(mNowSpr);
 			
 			
-			_txtVal = new Label();
-			_txtVal.y = -4;
-			_txtVal.color = 0xffffff;
-			_txtVal.width = 100;
-			_txtVal.height = 20;
-			_txtVal.align = TextFormatAlign.CENTER;
+			mTxtVal = new Label();
+			mTxtVal.y = -4;
+			mTxtVal.color = 0xffffff;
+			mTxtVal.width = 100;
+			mTxtVal.height = 20;
+			mTxtVal.align = TextFormatAlign.CENTER;
 			
-			this.addChild(_txtVal);
+			this.addChild(mTxtVal);
 			
 		}
 		
 		/**
 		 * 最大值 
 		 */		
-		private var _maxVal:int;
+		protected var mMaxVal:int;
 		
 		/**
 		 * 当前值 
 		 */		
-		private var _nowSpr:Sprite;
+		protected var mNowSpr:Sprite;
 		
 		/**
 		 * 显示值 
 		 */		
-		private var _txtVal:Label;
+		protected var mTxtVal:Label;
 		
 		/**
 		 * 设置当前值 
@@ -59,21 +59,31 @@ package GGM.panel
 		 */		
 		public function setNowVal(val:int):void
 		{
-			_nowSpr.graphics.clear();
-			_nowSpr.graphics.beginFill(0xff0000);
-			_nowSpr.graphics.drawRoundRect(0,0,val,10,6,6);
-			_nowSpr.graphics.endFill();
+			mNowSpr.graphics.clear();
+			mNowSpr.graphics.beginFill(0xff0000);
+			mNowSpr.graphics.drawRoundRect(0,0,val,10,6,6);
+			mNowSpr.graphics.endFill();
 			
-			if(val > this._maxVal)
+			if(val > this.mMaxVal)
 			{
-				this._maxVal = val;
+				this.mMaxVal = val;
 			}
 			
+			this.graphics.clear();
 			this.graphics.beginFill(0);
-			this.graphics.drawRoundRect(0,0,_maxVal,10,6,6);
+			this.graphics.drawRoundRect(0,0,mMaxVal,10,6,6);
 			this.graphics.endFill();
 			
-			_txtVal.text = val+ "/" + this._maxVal;
+			mTxtVal.text = val+ "/" + this.mMaxVal;
+		}
+		
+		public function refreshMaxVal():void
+		{
+			this.mMaxVal = 100;
+			this.graphics.clear();
+			this.graphics.beginFill(0);
+			this.graphics.drawRoundRect(0,0,mMaxVal,10,6,6);
+			this.graphics.endFill();
 		}
 	}
 }

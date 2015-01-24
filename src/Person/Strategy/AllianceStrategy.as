@@ -19,7 +19,9 @@ package Person.Strategy
 			var minspeed:int = person1.getSpeed() > person2.getSpeed() ? person2.getSpeed() : person1.getSpeed();
 			var minendurance:int = person1.getEndurance() > person2.getEndurance() ? person2.getEndurance() : person1.getEndurance();
 			if (person1.getSpeed() * person1.getEndurance() >= minspeed * minendurance) true;
-			return Math.random() <= 1.0 * person1.getAlign() / Util.Constants.MAX_PERSON_ALIGN;
+			
+			var rand:Number = Math.random();
+			return rand <= 1.0 * person1.getAlign() / Util.Constants.MAX_PERSON_ALIGN;
 		}
 		
 		public function judgeAlign(person1:IPerson, person2:IPerson):Boolean

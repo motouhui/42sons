@@ -79,7 +79,7 @@ package
 			
 			App.asset.cacheBitmapData("button",GameSkin.button_bitmapdata);
 			
-			_hero = new AvatarBase(GameSkin.avatar_bitmapdata,2,AvatarBase.PERSON_TYPE_CRAZY_ATTACK,"SNAKE");
+			_hero = new AvatarBase(GameSkin.avatar_bitmapdata,2,AvatarBase.PERSON_TYPE_CRAZY_ATTACK,"SNAKE",24,36);
 			
 			
 			_keyDownDict = new Dictionary();
@@ -158,13 +158,14 @@ package
 			_mapSpr.filters = null;
 			_mapSpr.addChild(_hero);
 			
-			for(i = 0 ;i < 20; i++)
+			for(i = 0 ;i < 200; i++)
 			{
 				var player:AvatarBase = new AvatarBase(
-					AvatarSkin.AVATAR_LIST[i],
-					int(Math.random()*3 + 1),
+					AvatarSkin.AVATAR_LIST[i % 45],
+					int(Math.random()*5 + 1),
 					AvatarBase.PERSON_TYPE_CRAZY_ATTACK,
-					"刘德华"+i
+					"刘德华"+i,
+					24,36
 				);
 				
 				_mapSpr.addChild(player);
@@ -207,6 +208,9 @@ package
 			_playerInfo.setNowHp(_hero.perData.getLife());
 			
 			_refreshLookAt();
+			
+			//刷新血量上限
+			_playerInfo.refreshMaxHp();
 			
 			_playerInfo.setLeftPerson(_playerList.length + 1);
 		}
@@ -459,14 +463,14 @@ package
 							{
 								if(secPer.perData.judgeAlign(firPer.perData))
 								{
-									if(secPer == _hero)
-									{
-										secPer.perData.doAlign(firPer.perData);
-									}
-									else
-									{
-										firPer.perData.doAlign(secPer.perData);
-									}
+//									if(secPer == _hero)
+//									{
+//										secPer.perData.doAlign(firPer.perData);
+//									}
+//									else
+//									{
+//										firPer.perData.doAlign(secPer.perData);
+//									}
 									isAlign = true;
 									
 									alignDict[firPer.nickName + "_" + secPer.nickName] = true;
@@ -533,7 +537,7 @@ package
 										{
 											secPer.perData.doAlign(firPer.perData);
 											
-											secPer._delType = AvatarBase.DEL_CAZ_JOIN_TEAM;
+											firPer._delType = AvatarBase.DEL_CAZ_JOIN_TEAM;
 											
 											//添加到需要删除的队列里面
 											needRemovePersonIndexList.push(firPer);
@@ -631,6 +635,12 @@ package
 			
 			//移除失败者
 			_removeLoser(needRemovePersonIndexList);
+			
+			//更新血条
+			for each(var avatarBase:AvatarBase in _playerList)
+			{
+				avatarBase.updatehpBar();
+			}
 		}
 		
 		/**

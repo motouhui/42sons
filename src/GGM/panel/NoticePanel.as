@@ -50,7 +50,7 @@ package GGM.panel
 			{
 				if(_strList.length > 0)
 				{
-					var str:String = _strList.pop();
+					var str:String = _strList.shift();
 					
 					this._isPlay = true;
 					

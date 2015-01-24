@@ -3,10 +3,15 @@ package GGM.avatar
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
+	import flash.filters.GlowFilter;
+	
+	import GGM.panel.UserHpBar;
 	
 	import Person.Alliance;
 	import Person.CrazyAttackPerson;
 	import Person.IPerson;
+	
+	import morn.core.components.Label;
 	
 	/**
 	 * 人物基础类 
@@ -57,6 +62,20 @@ package GGM.avatar
 			this.nickName = nickName;
 			
 			this.isTeam = false;
+			
+			this.txtUserName = new Label(this.nickName);
+			this.txtUserName.color = 0xff0000;
+			this.txtUserName.size = 12;
+			this.txtUserName.filters = [new GlowFilter(0x00ff00)];
+			this.addChild(this.txtUserName);
+			this.txtUserName.y = this.avatar.y - this.txtUserName.height;
+			this.txtUserName.x = (avatar.width - this.txtUserName.width)>>1;
+			
+			_userHpBar = new UserHpBar(10);
+			this.addChild(_userHpBar);
+			this._userHpBar.x = (avatar.width - this._userHpBar.width)>>1;
+			this._userHpBar.y = this.txtUserName.y - this._userHpBar.height;
+			
 		}
 		
 		/**
@@ -111,6 +130,17 @@ package GGM.avatar
 		 * 被谁杀死的 
 		 */		
 		public var killByWho:String;
+		
+		/**
+		 * 头顶标签 
+		 */		
+		private var txtUserName:Label;
+		
+		/**
+		 * 头顶血条 
+		 */		
+		private var _userHpBar:UserHpBar;
+		
 		
 		/**
 		 * 是否是个团队 
@@ -188,6 +218,11 @@ package GGM.avatar
 		public function setUnderAttack(isAttack:Boolean):void
 		{
 			underAttackImg.visible = isAttack;
+		}
+		
+		public function updatehpBar():void
+		{
+			this._userHpBar.setNowVal(this.perData.getLife()/10);
 		}
 		
 	}

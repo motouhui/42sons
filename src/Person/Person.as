@@ -71,7 +71,7 @@ package Person
 		
 		public function setAlign(align:int):IPerson
 		{
-			this._align = align;
+			this._align = align < 1 ? 1 : align;
 			return this;
 		}
 		
@@ -122,6 +122,9 @@ package Person
 		public function decLife(x:int):IPerson
 		{
 			this._life -= x;
+			if (this._life <= 0) {
+				this.setDead();
+			}
 			this._battlelust = this._battlelust > Util.Constants.getMinBattleLust() ? 
 				this._battlelust - 1 : Util.Constants.getMinBattleLust();
 			return this;

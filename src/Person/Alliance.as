@@ -7,7 +7,7 @@ package Person
 	
 	import Util.Constants;
 	import Util.Util;
-
+	
 	public class Alliance implements IPerson
 	{		
 		private var _persons:Vector.<IPerson>;
@@ -183,7 +183,7 @@ package Person
 				this._battlelust += person.getBattleLust();
 			}
 			if (_persons.length < Util.Constants.MAX_ALLIANCE_MEMBERS) {
-				this._align / _persons.length;
+				this._align /= _persons.length;
 			} else {
 				this._align = 1;
 			}
@@ -205,7 +205,7 @@ package Person
 			if (person is Person) {
 				person.setAlliance(this);
 				_persons.push(person);
-				if (_persons.length == 3) {
+				if (_persons.length == Util.Constants.MAX_ALLIANCE_MEMBERS + 1) {
 					var minindex:int = 0;
 					var minpower:int = _persons[0].getPower();
 					for(var i:int = 1; i < _persons.length; i++) {
@@ -214,8 +214,8 @@ package Person
 							minpower = _persons[i].getPower();
 						}
 					}
+					_persons[minindex].setDead();
 					_persons.splice(minindex, 1);
-					person.setDead();
 				}
 				this.doReset();
 			} else {
@@ -236,6 +236,15 @@ package Person
 						ops[index] = tmp;
 					}
 				}
+				
+				for each(var p:IPerson in _persons) {
+					p.setAlign(p.getAlign() - 1);	
+				}
+				for each(var pp:IPerson in alliance.getMembers()) {
+					pp.setAlign(pp.getAlign() - 1);
+				}
+				
+				
 				this.doReset();
 				alliance.doReset();
 			}
@@ -243,6 +252,18 @@ package Person
 		
 		public function doAttack(person:IPerson):void
 		{
+			if (!this.isLive()) {
+				trace("what fuck");
+			}
+			if (this.isLive()) {
+				for (var j:int = 0; j < _persons.length; j++) {
+					if(!_persons[j].isLive())
+					{
+						trace("some body died");
+					}
+				}
+			}
+			
 			var dlt:int = this._power - person.getPower();
 			if (dlt < 0) {
 				this.decLife(dlt);
@@ -253,6 +274,23 @@ package Person
 					this._battlelust + 1 : Util.Constants.getMaxBattleLust();
 				for (var i:int = 0; i < _persons.length; i++) {
 					_persons[i].setBattleLust(this._battlelust);
+				}
+			}
+			if (this.isLive()) {
+				for (var j:int = 0; j < _persons.length; j++) {
+					if(!_persons[j].isLive())
+					{
+						trace("some body died");
+					}
+				}
+			}
+			if(person.isLive()) {
+				if(person is Alliance)
+				{
+					if(!Alliance(person).isLive())
+					{
+						trace("some body all died");
+					}
 				}
 			}
 		}
@@ -286,6 +324,7 @@ package Person
 		
 		public function decLife(x:int):IPerson
 		{
+			var xx:int = x;
 			this._life -= x;
 			this._battlelust = this._battlelust > Util.Constants.getMinBattleLust() ? 
 				this._battlelust - 1 : Util.Constants.getMinBattleLust();
@@ -297,8 +336,8 @@ package Person
 			}
 			while (x) {
 				var flag:Boolean = false;
-				for (var index:int = 0; index < this._persons.length; index++) {
-					if (this._persons[index].life() > 1) {
+				for (var index:int = 0; index < this._persons.length && x > 0; index++) {
+					if (this._persons[index].getLife() > 1) {
 						this._persons[index].decLife(1);
 						x--;
 						flag = true;
@@ -307,7 +346,7 @@ package Person
 				if (flag == false) break;
 			}
 			
-			if (x > 0) {
+			if (x >= 0) {
 				var i:int;
 				for (i = 0; i < this._persons.length && x > 0; i++) {
 					this._persons[i].setDead();
@@ -320,11 +359,25 @@ package Person
 						return person1.getLife() - person2.getLife();
 					});
 					while(this._persons.length > 0) {
-						var person:IPerson = this._persons.pop();
-						person.setDead();
+						if(!this._persons[0].isLive())
+						{
+							var person:IPerson = this._persons.shift();
+							person.setDead();
+						} else {
+							break;
+						}
 					}
 				}
+			} else {
+				trace("fuck 2");
 			}
+			
+			for each(var t:IPerson in this._persons) {
+				if (this.isLive() == false) {
+					trace("fuck 3");
+				}
+			}
+			
 			return this;
 		}
 		
