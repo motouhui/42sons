@@ -117,7 +117,7 @@ package
 			printObject(e.result);
 			var arr:Array = new Array();
 			var map:Object = new Object();
-			while (arr.length < _tempNumberOfPlayers / 2) {
+			while (arr.length < NUMBER_OF_PLAYERS / 2) {
 				var idx:int = randomNumber(0, e.result.ids.length - 1);
 				var uid:String = e.result.ids[idx];
 				if (!map[uid]) { // distinct
@@ -141,7 +141,7 @@ package
             trace("getBilateralResult");
             printObject(e.result);
             var arr:Array = new Array();
-            while (arr.length < _tempNumberOfPlayers / 2) {
+            while (arr.length < NUMBER_OF_PLAYERS / 2) {
                 var idx:int = randomNumber(0, e.result.ids.length - 1);
                 var uid:String = e.result.ids[idx];
                 if (!_uidMap[uid]) { // distinct
@@ -165,20 +165,25 @@ package
 			trace("init people with weibo users information");
 			for each (var weiboUser:Object in _initUsers) {
 				trace("got user", weiboUser.name);
-				var avatar:int = Math.abs(weiboUser.id % 45);
-				var speed:int = Math.abs(weiboUser.id % 5) + 1;
-				var type:String;
-				switch(Math.abs(weiboUser.id) % 3) {
-					case 0: type = AvatarBase.PERSON_TYPE_CRAZY_ATTACK; break;
-					case 1: type = AvatarBase.PERSON_TYPE_CALM; break;
-					case 2: type = AvatarBase.PERSON_TYPE_TIMID; break;
-					default: type = AvatarBase.PERSON_TYPE_CALM;
-				}
-				var name:String = weiboUser.name;
-				_initGamePlayers.push({"avatar":avatar,"speed":speed,"type":type,"name":name});
+				_initGamePlayers.push(generateArgsGroupByWeiboUser(weiboUser));
 			}
 			// 完成数据拉取，继续游戏初始化
-			_afterGenesisCallback(_me, _initGamePlayers);
+			_afterGenesisCallback(generateArgsGroupByWeiboUser(_me), _initGamePlayers);
+		}
+		
+		private function generateArgsGroupByWeiboUser(weiboUser:Object):Object
+		{
+			var avatar:int = Math.abs(weiboUser.id % 45);
+			var speed:int = Math.abs(weiboUser.id % 5) + 1;
+			var type:String;
+			switch(Math.abs(weiboUser.id) % 3) {
+				case 0: type = AvatarBase.PERSON_TYPE_CRAZY_ATTACK; break;
+				case 1: type = AvatarBase.PERSON_TYPE_CALM; break;
+				case 2: type = AvatarBase.PERSON_TYPE_TIMID; break;
+				default: type = AvatarBase.PERSON_TYPE_CALM;
+			}
+			var name:String = weiboUser.name;
+			return {"avatar":avatar,"speed":speed,"type":type,"name":name};
 		}
         
         private function printObject(object:Object):void
