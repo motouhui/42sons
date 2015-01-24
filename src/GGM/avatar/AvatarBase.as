@@ -8,8 +8,10 @@ package GGM.avatar
 	import GGM.panel.UserHpBar;
 	
 	import Person.Alliance;
+	import Person.CalmPerson;
 	import Person.CrazyAttackPerson;
 	import Person.IPerson;
+	import Person.TimidPerson;
 	
 	import morn.core.components.Label;
 	
@@ -35,6 +37,14 @@ package GGM.avatar
 		 * 疯狂攻击人物 
 		 */		
 		public static const PERSON_TYPE_CRAZY_ATTACK:String = "PERSON_TYPE_CRAZY_ATTACK";
+		/**
+		 * 冷静的人物
+		 */
+		public static const PERSON_TYPE_CALM:String = "PERSON_TYPE_CALM";
+		/**
+		 * 软弱的人物
+		 */
+		public static const PERSON_TYPE_TIMID:String = "PERSON_TYPE_TIMID";
 		
 		public function AvatarBase(res:BitmapData,moveStep:int,type:String,nickName:String,width:int = -1,height:int = -1)
 		{
@@ -104,6 +114,18 @@ package GGM.avatar
 				case AvatarBase.PERSON_TYPE_CRAZY_ATTACK:
 				{
 					this.perData = new CrazyAttackPerson();
+				}
+					break;
+				//冷静
+				case AvatarBase.PERSON_TYPE_CALM:
+				{
+					this.perData = new CalmPerson();
+				}
+					break;
+				//懦弱
+				case AvatarBase.PERSON_TYPE_TIMID:
+				{
+					this.perData = new TimidPerson();
 				}
 					break;
 			}
