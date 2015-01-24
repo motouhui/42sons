@@ -74,7 +74,20 @@ package GGM.avatar
 			_userHpBar = new UserHpBar(10);
 			this.addChild(_userHpBar);
 			this._userHpBar.x = (avatar.width - this._userHpBar.width)>>1;
-			this._userHpBar.y = this.txtUserName.y - this._userHpBar.height;
+			this._userHpBar.y = this.txtUserName.y - this._userHpBar.height +7;
+			
+			//同意图标
+			_agreeIcon = new Bitmap(new BitmapData(5,10,false,0x00ff00));
+			_agreeIcon.visible =false;
+			this.addChild(_agreeIcon);
+			
+			//拒绝图标
+			_refusalIcon = new Bitmap(new BitmapData(5,10,false,0xff0000));
+			_refusalIcon.visible =false;
+			this.addChild(_refusalIcon);
+			
+			_agreeIcon.x = this.avatar.width/2;
+			_agreeIcon.y = _userHpBar.y - _agreeIcon.height;
 			
 		}
 		
@@ -114,7 +127,7 @@ package GGM.avatar
 		/**
 		 * 被删除的情况 
 		 */		
-		public var _delType:String;
+		public var _delType:String = "default";
 		
 		/**
 		 * 人物名称 
@@ -140,6 +153,16 @@ package GGM.avatar
 		 * 头顶血条 
 		 */		
 		private var _userHpBar:UserHpBar;
+		
+		/**
+		 * 头顶图标 
+		 */		
+		private var _agreeIcon:Bitmap;
+		
+		/**
+		 * 头顶图标 
+		 */		
+		private var _refusalIcon:Bitmap;
 		
 		
 		/**
@@ -209,20 +232,39 @@ package GGM.avatar
 			}
 		}
 		
-		/**
-		 * 是否在被攻击？ 
-		 * @param isAttack
-		 * @return 
-		 * 
-		 */		
-		public function setUnderAttack(isAttack:Boolean):void
-		{
-			underAttackImg.visible = isAttack;
-		}
-		
 		public function updatehpBar():void
 		{
 			this._userHpBar.setNowVal(this.perData.getLife()/10);
+			
+			this._userHpBar.x = (avatar.width - this._userHpBar.width)>>1;
+		}
+		
+		/**
+		 * 改变状态 
+		 * 
+		 */		
+		public function changeState(state:int):void
+		{
+			switch(state)
+			{
+				case 1:
+				{
+					this._agreeIcon.visible =true;
+					this._refusalIcon.visible = false;
+				}
+					break;
+				case 2:
+				{
+					this._agreeIcon.visible = false;
+					this._refusalIcon.visible = true;
+				}
+					break;
+				case 0:
+				{
+					this._agreeIcon.visible = false;
+					this._refusalIcon.visible = false;
+				}
+			}
 		}
 		
 	}

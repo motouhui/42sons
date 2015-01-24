@@ -2,14 +2,10 @@ package GGM.panel
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
-	import flash.filters.BlurFilter;
 	import flash.filters.GlowFilter;
-	import flash.filters.ShaderFilter;
 	import flash.text.TextField;
 	
 	import GGM.skin.GameSkin;
-	
-	import morn.core.components.Label;
 
 	/**
 	 * 用户信息面板 
@@ -18,6 +14,7 @@ package GGM.panel
 	 */	
 	public class PlayerInfoView extends Sprite
 	{
+		
 		public function PlayerInfoView()
 		{
 			

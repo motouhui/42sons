@@ -40,5 +40,9 @@ package GGM.panel
 			this.graphics.endFill();
 		}
 		
+		override public function get width():Number
+		{
+			return super.mMaxVal;
+		}
 	}
 }
