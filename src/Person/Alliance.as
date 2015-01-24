@@ -233,8 +233,8 @@ package Person
 				person.setAlliance(this);
 				_persons.push(person);
 				if (_persons.length == Util.Constants.MAX_ALLIANCE_MEMBERS + 1) {
-					var minindex:int = 0;
-					var minpower:int = _persons[0].getPower();
+					var minindex:int = -1;
+					var minpower:int = int.MAX_VALUE;
 					for(var i:int = 1; i < _persons.length; i++) {
 						if (minpower > _persons[i].getPower() && _persons[i].isHero() == false) {
 							minindex = i;
