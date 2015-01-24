@@ -4,13 +4,11 @@ package
     import com.sina.microblog.events.MicroBlogErrorEvent;
     import com.sina.microblog.events.MicroBlogEvent;
     
-    import flash.system.Security;
-    
     import GGM.avatar.AvatarBase;
     
     public class Chaos
     {
-		private static const NUMBER_OF_PLAYERS:int = 2;
+		private static const NUMBER_OF_PLAYERS:int = 42; // !! 必须是偶数 !!
 		
         private var _mb:MicroBlog = new MicroBlog();
 		private var _uidMap:Object = new Object(); // 临时存放微博用户id的哈希表，用来去重
@@ -120,12 +118,11 @@ package
             trace("getFriendsResult");
 			printObject(e.result);
 			var arr:Array = new Array();
-			var map:Object = new Object();
 			while (arr.length < NUMBER_OF_PLAYERS / 2) {
 				var idx:int = randomNumber(0, e.result.ids.length - 1);
 				var uid:String = e.result.ids[idx];
-				if (!map[uid]) { // distinct
-					map[uid] = true
+				if (!_uidMap[uid]) { // distinct
+					_uidMap[uid] = true
 					arr.push(uid);
 				}
 			}

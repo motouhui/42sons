@@ -16,7 +16,7 @@ package GGM.util
 		{
 		}
 		
-		public static function getPlayerMovePoint2(player:AvatarBase):void
+		public static function getPlayerMovePoint2(player:AvatarBase):Point
 		{
 			var p:Point;
 			if (player.x == 0 && player.y == 0) {
@@ -45,6 +45,8 @@ package GGM.util
 			player.x = player.x > GameStageData.rangeWidth - player.avatar.width ? GameStageData.rangeWidth - player.avatar.width : player.x;
 			player.y = player.y < 40 ? 40 : player.y;
 			player.y = player.y > GameStageData.rangeHeight - player.avatar.height ? GameStageData.rangeHeight - player.avatar.height : player.y;
+			
+			return p;
 		}
 		
 		/**

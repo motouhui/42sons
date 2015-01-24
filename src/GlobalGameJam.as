@@ -5,6 +5,7 @@ package
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.filters.GlowFilter;
+	import flash.geom.Point;
 	import flash.system.Security;
 	import flash.system.System;
 	import flash.ui.Keyboard;
@@ -20,6 +21,8 @@ package
 	import GGM.util.GameStageData;
 	import GGM.util.MoveOutInUtil;
 	import GGM.util.PlayerBattleUtil;
+	
+	import Util.Util;
 	
 	import morn.core.components.Label;
 	
@@ -337,12 +340,14 @@ package
 				AvatarMoveUtil.getPlayerMovePoint(
 					_hero,"left");
 				ischange = true;
+				_hero.avatar.bitmapData = Util.Util.flipBitmapData(_hero.BITMAP_DATA);
 			}
 			if(this._keyDownDict[Keyboard.RIGHT]== true||this._keyDownDict[Keyboard.D] == true)
 			{
 				AvatarMoveUtil.getPlayerMovePoint(
 					_hero,"right");
 				ischange = true;
+				_hero.avatar.bitmapData = _hero.BITMAP_DATA;
 			}
 			
 			//刷新视野
@@ -354,7 +359,12 @@ package
 				//刷新人物的移动范围
 				for each( var player:AvatarBase in _playerList)
 				{
-					AvatarMoveUtil.getPlayerMovePoint2(player);
+					var direction:Point = AvatarMoveUtil.getPlayerMovePoint2(player);
+					if (direction.x > 0) { // right
+						player.avatar.bitmapData = player.BITMAP_DATA;
+					} else if (direction.x < 0) {
+						player.avatar.bitmapData = Util.Util.flipBitmapData(player.BITMAP_DATA);
+					}
 				}
 			}
 			//判断人物关系进行更新
@@ -481,7 +491,7 @@ package
 				LOOK_AT_RANGE);
 			
 			spr.graphics.endFill();
-			_mapSpr.drawMask(spr);
+//			_mapSpr.drawMask(spr);
 		}
 	}
 }
