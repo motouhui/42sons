@@ -33,6 +33,19 @@ package Person
 			_strategy = new AllianceStrategy();
 			_persons = new Vector.<IPerson>();
 		}
+
+		private var _name:String = null;
+		
+		public function getName():String
+		{
+			return this._name;
+		}
+		
+		public function setName(name:String):IPerson
+		{
+			this._name = name;
+			return this;
+		}
 		
 		private var _bitmap:BitmapData = null;
 
@@ -220,10 +233,10 @@ package Person
 				person.setAlliance(this);
 				_persons.push(person);
 				if (_persons.length == Util.Constants.MAX_ALLIANCE_MEMBERS + 1) {
-					var minindex:int = 0;
-					var minpower:int = _persons[0].getPower();
-					for(var i:int = 1; i < _persons.length; i++) {
-						if (minpower > _persons[i].getPower()) {
+					var minindex:int = -1;
+					var minpower:int = int.MAX_VALUE;
+					for(var i:int = 0; i < _persons.length; i++) {
+						if (minpower > _persons[i].getPower() && _persons[i].isHero() == false) {
 							minindex = i;
 							minpower = _persons[i].getPower();
 						}
@@ -334,23 +347,22 @@ package Person
 			if (x >= 0) {
 				var i:int;
 				for (i = 0; i < this._persons.length && x > 0; i++) {
-					this._persons[i].setDead();
-					x--;
+					if (this._persons[i].isHero() == false) {
+						this._persons[i].setDead();
+						x--;
+					}
 				}
-				if (i == this._persons.length) {
-					this.setDead();
-				} else {
-					this._persons.sort(function(person1:IPerson, person2:IPerson):int {
-						return person1.getLife() - person2.getLife();
-					});
-					while(this._persons.length > 0) {
-						if(!this._persons[0].isLive())
-						{
-							var person:IPerson = this._persons.shift();
-							person.setDead();
-						} else {
-							break;
-						}
+				
+				this._persons.sort(function(person1:IPerson, person2:IPerson):int {
+					return person1.getLife() - person2.getLife();
+				});
+				while(this._persons.length > 0) {
+					if(!this._persons[0].isLive())
+					{
+						var person:IPerson = this._persons.shift();
+						person.setDead();
+					} else {
+						break;
 					}
 				}
 			}

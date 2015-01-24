@@ -10,6 +10,9 @@ package Person
 		function setBitmapData(bitmap:BitmapData):IPerson;
 		function getBitmapData():BitmapData;
 		
+		function getName():String;
+		function setName(name:String):IPerson;
+		
 		function getSpeed():int; // 0-10
 		function setSpeed(speed:int):IPerson;
 		function getAlign():int; // 0-10

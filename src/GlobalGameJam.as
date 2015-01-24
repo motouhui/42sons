@@ -5,6 +5,8 @@ package
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.filters.GlowFilter;
+	import flash.system.Security;
+	import flash.system.System;
 	import flash.ui.Keyboard;
 	import flash.utils.Dictionary;
 	
@@ -85,13 +87,14 @@ package
 			
 			// 拉取微博数据
 			var chaos:Chaos = new Chaos(genesisCallback);
+			
 		}
 		
 		private function genesisCallback(hero, players:Array):void
 		{
 			_weiboMe = hero;
 			_weiboPlayers = players
-				
+			
 			_hero = new AvatarBase(
 				AvatarSkin.AVATAR_LIST[_weiboMe.avatar],
 				_weiboMe.speed,
@@ -99,7 +102,6 @@ package
 				_weiboMe.name,
 				24,36
 			);
-			
 			
 			_keyDownDict = new Dictionary();
 			
@@ -179,11 +181,11 @@ package
 			
 			_mapSpr.filters = null;
 			_mapSpr.addChild(_hero);
-
+			
 			for each(var group:Object in args)
 			{
 				trace(group.avatar, group.speed, group.type, group.name);
-
+				
 				var player:AvatarBase = new AvatarBase(
 					AvatarSkin.AVATAR_LIST[group.avatar],
 					group.speed,
@@ -227,6 +229,8 @@ package
 				lust:int(Math.random()*2 + 8),
 				isHero:true
 			});
+			
+			_hero.updatehpBar();
 			
 			_playerInfo.setNowHp(_hero.perData.getLife());
 			
@@ -394,6 +398,8 @@ package
 			//更新英雄的血条
 			_hero.updatehpBar();
 			
+			_playerInfo.updateTeamList(_hero);
+			
 		}
 		
 		/**
@@ -414,9 +420,9 @@ package
 				if(avatar._delType == AvatarBase.DEL_CAZ_DIE)
 				{
 					_playerInfo.noticePanel.addNotice(
-						"player<font size='30' color='#0xffffff'>" + 
+						"player<font size='14' color='#0xffffff'>" + 
 						avatar.nickName + 
-						"</font> killed by <font size='30' color='#0xffffff'>" + avatar.killByWho + "</font>");
+						"</font> killed by <font size='14' color='#0xffffff'>" + avatar.killByWho + "</font>");
 				}
 				
 				avatar = null;
