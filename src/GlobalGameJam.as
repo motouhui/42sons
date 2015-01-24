@@ -22,6 +22,7 @@ package
 	import GGM.util.MoveOutInUtil;
 	import GGM.util.PlayerBattleUtil;
 	
+	import Util.Constants;
 	import Util.Util;
 	
 	import morn.core.components.Label;
@@ -207,10 +208,10 @@ package
 				player.setPerData(
 					{
 						life:100,
-						align:int(Math.random() * 10),
-						endurance:int(Math.random()*10),
-						power:int(Math.random()*10),
-						speed:int(Math.random()*10),
+						align:int(Math.random() * Util.Constants.MAX_PERSON_ALIGN),
+						endurance:int(Math.random() * Util.Constants.MAX_PERSON_ENDURANCE),
+						power:int(Math.random() * Util.Constants.MAX_PERSON_ATTACK),
+						speed:int(Math.random() * Util.Constants.MAX_PERSON_SPEED),
 						lust:int(Math.random()*2 + 8)
 					});
 				
@@ -228,11 +229,11 @@ package
 			
 			_hero.setPerData({
 				life:100,
-				align:int(Math.random() * 10),
-				endurance:int(Math.random()*10),
-				power:int(Math.random()*10),
-				speed:int(Math.random()*10),
-				lust:int(Math.random()*2 + 8),
+				align:int(Math.random() * Util.Constants.MAX_PERSON_ALIGN),
+				endurance:int(Math.random() * Util.Constants.MAX_PERSON_ENDURANCE),
+				power:int(Math.random() * Util.Constants.MAX_PERSON_ATTACK),
+				speed:int(Math.random() * Util.Constants.MAX_PERSON_SPEED),
+				lust:int(Math.random() * 2 + 8),
 				isHero:true
 			});
 			
