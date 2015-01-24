@@ -4,6 +4,8 @@ package GGM.panel
 	import flash.display.Sprite;
 	
 	import GGM.skin.GameSkin;
+	
+	import Util.Util;
 
 	/**
 	 * 地图 
@@ -38,7 +40,12 @@ package GGM.panel
 			
 			for(var i:int = 0 ; i< NUMBER_OF_GRASS_1;i++)
 			{
-				var grass:Bitmap = new Bitmap(GameSkin.grass01_bitmapdata);
+				var grass:Bitmap;
+				if (Math.random() > 0.5) {
+					grass = new Bitmap(GameSkin.grass01_bitmapdata);
+				} else {
+					grass = new Bitmap(Util.Util.flipBitmapData(GameSkin.grass01_bitmapdata));
+				}
 				grass.width = 14;
 				grass.height = 4;
 				
@@ -48,7 +55,12 @@ package GGM.panel
 			}
 			for(var i2:int = 0; i2< NUMBER_OF_GRASS_2; i2++)
 			{
-				var grass2:Bitmap = new Bitmap(GameSkin.grass02_bitmapdata);
+				var grass2:Bitmap;
+				if (Math.random() > 0.5) {
+					grass2 = new Bitmap(GameSkin.grass02_bitmapdata);
+				} else {
+					grass2 = new Bitmap(Util.Util.flipBitmapData(GameSkin.grass02_bitmapdata));
+				}
 				grass2.width = 10;
 				grass2.height = 4;
 				
@@ -58,7 +70,12 @@ package GGM.panel
 			}
 			for(var i3:int = 0 ; i3< NUMBER_OF_ROCK_1;i3++)
 			{
-				var rock:Bitmap = new Bitmap(GameSkin.rock01_bitmapdata);
+				var rock:Bitmap;
+				if (Math.random() > 0.5) {
+					rock = new Bitmap(GameSkin.rock01_bitmapdata);
+				} else {
+					rock = new Bitmap(Util.Util.flipBitmapData(GameSkin.rock01_bitmapdata));
+				}
 				rock.width = 30;
 				rock.height = 24;
 				
@@ -68,7 +85,12 @@ package GGM.panel
 			}
 			for(var i4:int = 0 ; i4< NUMBER_OF_ROCK_2;i4++)
 			{
-				var rock2:Bitmap = new Bitmap(GameSkin.rock02_bitmapdata);
+				var rock2:Bitmap;
+				if (Math.random() > 0.5) {
+					rock2 = new Bitmap(GameSkin.rock02_bitmapdata);
+				} else {
+					rock2 = new Bitmap(Util.Util.flipBitmapData(GameSkin.rock02_bitmapdata));
+				}
 				rock2.width = 16;
 				rock2.height = 10;
 				

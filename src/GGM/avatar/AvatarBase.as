@@ -49,10 +49,15 @@ package GGM.avatar
 		 */
 		public static const PERSON_TYPE_TIMID:String = "PERSON_TYPE_TIMID";
 		
+		/**
+		 * 图片数据
+		 */
+		public var BITMAP_DATA:BitmapData;
 		
 		
 		public function AvatarBase(res:BitmapData,moveStep:int,type:String,nickName:String,width:int = -1,height:int = -1)
 		{
+			BITMAP_DATA = res;
 			avatar = new Bitmap(res);
 			
 			if(width != -1)
