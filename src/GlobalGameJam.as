@@ -21,6 +21,9 @@ package
 	import GGM.util.MoveOutInUtil;
 	import GGM.util.PlayerBattleUtil;
 	
+	import Person.Alliance;
+	import Person.IPerson;
+	
 	import morn.core.components.Label;
 	
 	[SWF(width="800",height="600",backgroundColor="0")]
@@ -46,6 +49,11 @@ package
 		 * 玩家列表 
 		 */		
 		private var _playerList:Vector.<AvatarBase>;
+		
+		/**
+		 * 移除的玩家列表
+		 */
+		private var _removedPlayerList:Vector.<AvatarBase>;
 		
 		/**
 		 * 用户信息面板 
@@ -174,8 +182,19 @@ package
 				}
 				_playerList.length = 0;
 			}
-			
 			_playerList = new Vector.<AvatarBase>();
+			
+			var j:int;
+			if(_removedPlayerList)
+			{
+				for(j = 0;j< _removedPlayerList.length ;j++ )
+				{
+					if(_mapSpr.contains(_removedPlayerList[j]))
+						_mapSpr.removeChild(_removedPlayerList[j]);
+				}
+				_removedPlayerList.length = 0;
+			}
+			_removedPlayerList = new Vector.<AvatarBase>();
 			
 //			_hero.filters = [new GlowFilter(0x00ff00)];
 			
@@ -347,9 +366,35 @@ package
 			if(ischange == true)
 			{
 				//刷新人物的移动范围
-				for each( var player:AvatarBase in _playerList)
+				for each(var player:AvatarBase in _playerList)
 				{
-					AvatarMoveUtil.getPlayerMovePoint2(player);
+					if (player.perData is Alliance) {
+						var members:Vector.<IPerson> = Alliance(player.perData).getMembers();
+						for (var i:int in members) {
+							var person:IPerson = members[i];
+							for each(var crew:AvatarBase in _removedPlayerList) {
+								if (crew.perData == person && crew._delType == AvatarBase.DEL_CAZ_JOIN_TEAM) {
+									crew.x = player.x - player.width * i;
+									crew.y = player.y;
+								}
+							}
+						}
+					}
+					if (_hero.perData is Alliance) {
+						var members2:Vector.<IPerson> = Alliance(_hero.perData).getMembers();
+						for (var i2:int in members2) {
+							var person2:IPerson = members2[i2];
+							for each(var crew2:AvatarBase in _removedPlayerList) {
+								if (crew2.perData == person2 && crew2._delType == AvatarBase.DEL_CAZ_JOIN_TEAM) {
+									crew2.x = _hero.x - player.width * i2;
+									crew2.y = _hero.y;
+								}
+							}
+						}
+					}
+					if (player._delType != AvatarBase.DEL_CAZ_JOIN_TEAM) {
+						AvatarMoveUtil.getPlayerMovePoint2(player);
+					}
 				}
 			}
 			//判断人物关系进行更新
@@ -413,8 +458,10 @@ package
 				//删除人
 				_playerList.splice(_playerList.indexOf(avatar),1);
 				
-				if(avatar && _mapSpr.contains(avatar))
-					_mapSpr.removeChild(avatar);
+//				//因为死亡而被删除的需要被移除
+//				if(avatar && _mapSpr.contains(avatar)) {
+//					_mapSpr.removeChild(avatar);
+//				}
 				
 				//因为死亡而被删除才会显示死亡通知
 				if(avatar._delType == AvatarBase.DEL_CAZ_DIE)
@@ -422,10 +469,23 @@ package
 					_playerInfo.noticePanel.addNotice(
 						"player<font size='14' color='#0xffffff'>" + 
 						avatar.nickName + 
-						"</font> killed by <font size='14' color='#0xffffff'>" + avatar.killByWho + "</font>");
+						"</font> killed by <font size='14' color='#0xffffff'>" + avatar.killByWho + "</font>");			
+					
 				}
-				
-				avatar = null;
+
+				// 所有之前被判断为死亡的，都进入一个薪的list
+				_removedPlayerList.push(avatar);
+			}
+			
+			// 不显示真正死亡的
+			for each(var removedAvatar:AvatarBase in _removedPlayerList)
+			{
+				if (!removedAvatar.perData.isLive()) {
+					//因为死亡而被删除的需要被移除
+					if(removedAvatar && _mapSpr.contains(removedAvatar)) {
+						_mapSpr.removeChild(removedAvatar);
+					}
+				}
 			}
 			
 			_playerInfo.setLeftPerson(_playerList.length + 1);
@@ -476,7 +536,7 @@ package
 				LOOK_AT_RANGE);
 			
 			spr.graphics.endFill();
-			_mapSpr.drawMask(spr);
+//			_mapSpr.drawMask(spr);
 		}
 	}
 }
