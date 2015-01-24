@@ -265,19 +265,7 @@ package Person
 		}
 		
 		public function doAttack(person:IPerson):void
-		{
-			if (!this.isLive()) {
-				trace("what fuck");
-			}
-			if (this.isLive()) {
-				for (var j:int = 0; j < _persons.length; j++) {
-					if(!_persons[j].isLive())
-					{
-						trace("some body died");
-					}
-				}
-			}
-			
+		{	
 			var dlt:int = this._power - person.getPower();
 			if (dlt < 0) {
 				this.decLife(dlt);
@@ -288,23 +276,6 @@ package Person
 					this._battlelust + 1 : Util.Constants.getMaxBattleLust();
 				for (var i:int = 0; i < _persons.length; i++) {
 					_persons[i].setBattleLust(this._battlelust);
-				}
-			}
-			if (this.isLive()) {
-				for (var j:int = 0; j < _persons.length; j++) {
-					if(!_persons[j].isLive())
-					{
-						trace("some body died");
-					}
-				}
-			}
-			if(person.isLive()) {
-				if(person is Alliance)
-				{
-					if(!Alliance(person).isLive())
-					{
-						trace("some body all died");
-					}
 				}
 			}
 		}
@@ -381,14 +352,6 @@ package Person
 							break;
 						}
 					}
-				}
-			} else {
-				trace("fuck 2");
-			}
-			
-			for each(var t:IPerson in this._persons) {
-				if (this.isLive() == false) {
-					trace("fuck 3");
 				}
 			}
 			
