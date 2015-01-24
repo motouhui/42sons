@@ -1,5 +1,6 @@
 package Person
 {
+	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
 	import Person.Strategy.IStrategy;
@@ -22,6 +23,21 @@ package Person
 		private var _power:int;
 		private var _endurance:int;
 		private var _life:int;
+		
+		private var _bitmap:BitmapData = null;
+		
+		public function setBitmapData(bitmap:BitmapData):IPerson 
+		{
+			this._bitmap = bitmap;
+			return this;	
+		}
+		
+		public function getBitmapData():BitmapData
+		{
+			return this._bitmap;
+		}
+		
+		
 		
 		private var _strategy:IStrategy;
 		public function get Strategy():IStrategy

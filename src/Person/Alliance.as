@@ -1,5 +1,6 @@
 package Person
 {
+	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
 	import Person.Strategy.AllianceStrategy;
@@ -31,6 +32,19 @@ package Person
 		{
 			_strategy = new AllianceStrategy();
 			_persons = new Vector.<IPerson>();
+		}
+		
+		private var _bitmap:BitmapData = null;
+
+		public function setBitmapData(bitmap:BitmapData):IPerson 
+		{
+			this._bitmap = bitmap;
+			return this;	
+		}
+		
+		public function getBitmapData():BitmapData
+		{
+			return this._bitmap;
 		}
 		
 		public function isHero():Boolean

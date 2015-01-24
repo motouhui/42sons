@@ -1,12 +1,16 @@
 package Person
 {
+	import flash.display.BitmapData;
 
 	public interface IPerson
 	{
 		function isHero():Boolean;
 		function setHero():IPerson;
 		
-		function getSpeed():int; // 1-10
+		function setBitmapData(bitmap:BitmapData):IPerson;
+		function getBitmapData():BitmapData;
+		
+		function getSpeed():int; // 0-10
 		function setSpeed(speed:int):IPerson;
 		function getAlign():int; // 0-10
 		function setAlign(align:int):IPerson;
