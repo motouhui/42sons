@@ -4,10 +4,7 @@ package
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	import flash.filters.GlowFilter;
 	import flash.geom.Point;
-	import flash.system.Security;
-	import flash.system.System;
 	import flash.ui.Keyboard;
 	import flash.utils.Dictionary;
 	
