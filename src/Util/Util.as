@@ -5,7 +5,7 @@ package Util
 	import flash.geom.Matrix;
 
 	public class Util
-	{
+	{		
 		public static function Distance(x1:int, y1:int, x2:int, y2:int):Number 
 		{
 			return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
@@ -53,6 +53,29 @@ package Util
 			}
 			flipped.draw(original, matrix, null, null, null, true);
 			return flipped;
+		}
+		
+		/**
+		 * 在数据里拉取n个 不重复随机数据
+		 * @param arr
+		 * @param count
+		 * @return 
+		 * 
+		 */		
+		public static function getRandomItemFormVector(arr:Vector.<String>, count:int):Vector.<String>
+		{
+			//先获取一份copy
+			var resourceVec:Vector.<String> = arr.slice();
+			
+			//结果数据
+			var resultVec:Vector.<String> = new Vector.<String>();
+			
+			//随机数据
+			while(count--) {
+				resultVec.push(resourceVec.splice(int(Math.random() * resourceVec.length),1)); 
+			}
+			
+			return resultVec;
 		}
 	}
 }

@@ -326,5 +326,17 @@ package GGM.avatar
 			}
 		}
 		
+		public static function getPlayerTypeByNumber(number:int):String
+		{
+			var type:String;
+			switch(int(number)) {
+				case 0: type = AvatarBase.PERSON_TYPE_CRAZY_ATTACK; break;
+				case 1: type = AvatarBase.PERSON_TYPE_CALM; break;
+				case 2: type = AvatarBase.PERSON_TYPE_TIMID; break;
+				default: type = AvatarBase.PERSON_TYPE_CALM;
+			}
+			return type;
+		}
+		
 	}
 }
