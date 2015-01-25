@@ -71,11 +71,11 @@ package
 		/**
 		 * 游戏结束文字 
 		 */		
-		private var _lblGameOver:Label;
+		private var _lblGameOver:Bitmap;
 		/**
 		 * 游戏结束文字 
 		 */		
-		private var _lblWin:Label;
+		private var _lblWin:Bitmap;
 		
 		/**
 		 * 玩家战斗处理类 
@@ -98,31 +98,31 @@ package
 //			MonsterDebugger.initialize(this);
 			
 			App.asset.cacheBitmapData("button",GameSkin.button_bitmapdata);
+			App.asset.cacheBitmapData("button_weibo",GameSkin.button_weibo_bitmapdata);
+			App.asset.cacheBitmapData("button_guest",GameSkin.button_guest_bitmapdata);
 			
 			_englishNames = Util.Util.getRandomItemFormVector(Util.Constants.ENGLISH_NAMES, 50);
 			
 			_gameStartPanel.addChild(new Bitmap(GameSkin.startBg_bitmapdata));
 			
 			var startButton:Button = new Button();
-			startButton.skin = "button";
+			startButton.skin = "button_weibo";
 			startButton.width = 180;
 			startButton.height = 60;
 			startButton.x = 400 - startButton.width / 2;
 			startButton.y = 340 - startButton.height / 2;
-			startButton.label = "Start Game With WEIBO";
 			_gameStartPanel.addChild(startButton);
 			startButton.addEventListener(MouseEvent.CLICK, startButtonEventHandler);
 			
 			var guestButton:Button = new Button();
-			guestButton.skin = "button";
+			guestButton.skin = "button_guest";
 			guestButton.width = 180;
 			guestButton.height = 60;
 			guestButton.x = startButton.x;
 			guestButton.y = startButton.y + startButton.height + 30;
-			guestButton.label = "Start Game as GUEST";
-			_gameStartPanel.addChild(guestButton);
 			guestButton.addEventListener(MouseEvent.CLICK, guestButtonEventHandler);
 			
+			_gameStartPanel.addChild(guestButton);
 			this.addChild(_gameStartPanel);
 		}
 		
@@ -182,33 +182,25 @@ package
 			
 			this.addEventListener(Event.ENTER_FRAME,_enterFrameHandler);
 			
-			_lblGameOver = new Label();
-			_lblGameOver.size = 80;
-			_lblGameOver.color = 0xff0000;
-			_lblGameOver.text = "GAME OVER";
-			_lblGameOver.x = (this.width - _lblGameOver.width)>>1;
-			_lblGameOver.y = (this.height - _lblGameOver.height)>>1;
-			_lblGameOver.visible = false;
-			this.addChild(_lblGameOver);
-			
-			_lblWin = new Label();
-			_lblWin.size = 80;
-			_lblWin.color = 0xffffff;
-			_lblWin.text = "YOU WIN?";
-			_lblWin.x = (this.width - _lblWin.width)>>1;
-			_lblWin.y = (this.height - _lblWin.height)>>1;
-			_lblWin.visible = false;
-			this.addChild(_lblWin);
-			
-			
 			_retryPanel = new RetryPanel();
 			this.addChild(_retryPanel);
 			_retryPanel.visible = false;
-			_retryPanel.x = (this.width - _retryPanel.width)>>1;
-			_retryPanel.y = (this.height - _retryPanel.height)/2 - 20;
+			_retryPanel.x = (800 - _retryPanel.width)/2;
+			_retryPanel.y = (550 - _retryPanel.height)/2;
 			
+			_lblGameOver = new Bitmap(GameSkin.gameover_btmapdata);
+			_lblGameOver.x = (800 - _lblGameOver.width)>>1;
+			_lblGameOver.y = (550 - _lblGameOver.height)>>1;
+			_lblGameOver.visible = false;
+			this.addChild(_lblGameOver);
 			
-			//			playGameOver();
+			_lblWin = new Bitmap(GameSkin.youwin_btmapdata);
+			_lblWin.x = (800 - _lblWin.width)>>1;
+			_lblWin.y = (550 - _lblWin.height)>>1;
+			_lblWin.visible = false;
+			this.addChild(_lblWin);
+			
+//			playGameOver();
 		}
 		
 		/**

@@ -19,21 +19,21 @@ package GGM.util
 		public static function getPlayerMovePoint2(player:AvatarBase):Point
 		{
 			var p:Point;
-			if (player.x == 0 && player.y == 0) {
+			if (player.x == 0 && player.y <= 40) {
 				p = player.Step.knockLeftUpCornerDirection();
-			} else if (player.x == 0 && player.y == GameStageData.rangeHeight) {
+			} else if (player.x == 0 && player.y >= GameStageData.rangeHeight - player.avatar.height) {
 				p = player.Step.knockLeftDownCornerDirection();
-			} else if (player.x == GameStageData.rangeWidth && player.y == 0) {
+			} else if (player.x >= GameStageData.rangeWidth - player.avatar.width && player.y <= 40) {
 				p = player.Step.knockRightUpCornerDirection();
-			} else if (player.x == GameStageData.rangeWidth && player.y == GameStageData.rangeHeight) {
+			} else if (player.x >= GameStageData.rangeWidth - player.avatar.width && player.y >= GameStageData.rangeHeight - player.avatar.height) {
 				p = player.Step.knockRightDownCornerDirection();
 			} else if (player.x == 0) {
 				p = player.Step.knockLeftWallDirection();
-			} else if (player.x == GameStageData.rangeWidth) {
+			} else if (player.x >= GameStageData.rangeWidth - player.avatar.width) {
 				p = player.Step.knockRightWallDirection();
-			} else if (player.y == 0) {
+			} else if (player.y <= 40) {
 				p = player.Step.knockUpWallDirection();
-			} else if (player.y == GameStageData.rangeHeight) {
+			} else if (player.y >= GameStageData.rangeHeight - player.avatar.height) {
 				p = player.Step.knockDownWallDirection();
 			} else {
 				p = player.Step.direction();

@@ -24,6 +24,26 @@ package GGM.skin
 		private static const button:Class;
 		public static const button_bitmapdata:BitmapData = new button().bitmapData;
 		
+		[Embed(source="../../../resource/start_weibo.png")]
+		private static const button_weibo:Class;
+		public static const button_weibo_bitmapdata:BitmapData = new button_weibo().bitmapData;
+		
+		[Embed(source="../../../resource/start_guest.png")]
+		private static const button_guest:Class;
+		public static const button_guest_bitmapdata:BitmapData = new button_guest().bitmapData;
+		
+		[Embed(source="../../../resource/retry.png")]
+		private static const button_retry:Class;
+		public static const button_retry_btmapdata:BitmapData = new button_retry().bitmapData;
+		
+		[Embed(source="../../../resource/gameover.png")]
+		private static const gameover:Class;
+		public static const gameover_btmapdata:BitmapData = new gameover().bitmapData;
+		
+		[Embed(source="../../../resource/youwin.png")]
+		private static const youwin:Class;
+		public static const youwin_btmapdata:BitmapData = new youwin().bitmapData;
+		
 		[Embed(source="../../../resource/bg.png")]
 		private static const field:Class;
 		public static const field_bitmapdata:BitmapData = new field().bitmapData;
