@@ -95,7 +95,7 @@ package
 		{
 			App.init(this);
 			
-			MonsterDebugger.initialize(this);
+//			MonsterDebugger.initialize(this);
 			
 			App.asset.cacheBitmapData("button",GameSkin.button_bitmapdata);
 			
