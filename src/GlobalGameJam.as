@@ -1,7 +1,5 @@
 package
 {
-	import com.demonsters.debugger.MonsterDebugger;
-	
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -27,7 +25,6 @@ package
 	import Util.Util;
 	
 	import morn.core.components.Button;
-	import morn.core.components.Label;
 	
 	[SWF(width="800",height="600",backgroundColor="0")]
 	public class GlobalGameJam extends Sprite
@@ -565,8 +562,10 @@ package
 				
 				mist= new Bitmap(GameSkin.mist_bitmapdata);
 				
-				mist.width = 320;
-				mist.height = mist.width;
+//				stage.quality = StageQuality.HIGH;
+//				mist.width = 320;
+//				mist.height = mist.width;
+//				stage.quality = StageQuality.MEDIUM;
 				
 				mist.cacheAsBitmap = true;
 				
