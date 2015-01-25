@@ -1,13 +1,12 @@
 package
 {
+	import flash.display.Bitmap;
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	import flash.filters.GlowFilter;
 	import flash.geom.Point;
-	import flash.system.Security;
-	import flash.system.System;
 	import flash.ui.Keyboard;
 	import flash.utils.Dictionary;
 	
@@ -172,7 +171,7 @@ package
 			
 			_playerList = new Vector.<AvatarBase>();
 			
-//			_hero.filters = [new GlowFilter(0x00ff00)];
+			//			_hero.filters = [new GlowFilter(0x00ff00)];
 			
 			
 			_hero = new AvatarBase(
@@ -201,6 +200,7 @@ package
 					24,36
 				);
 				
+				
 				_mapSpr.addChild(player);
 				player.x = Math.random() * 800;
 				player.y = Math.random() * 500;
@@ -208,12 +208,14 @@ package
 				player.setPerData(
 					{
 						life:100,
-						align:int(Math.random() * Util.Constants.MAX_PERSON_ALIGN),
-						endurance:int(Math.random() * Util.Constants.MAX_PERSON_ENDURANCE),
-						power:int(Math.random() * Util.Constants.MAX_PERSON_ATTACK),
-						speed:int(Math.random() * Util.Constants.MAX_PERSON_SPEED),
+						align:int(Math.random() * Util.Constants.MAX_PERSON_ALIGN + 1),
+						endurance:int(Math.random() * Util.Constants.MAX_PERSON_ENDURANCE + 1),
+						power:int(Math.random() * Util.Constants.MAX_PERSON_ATTACK + 1),
+						speed:int(Math.random() * Util.Constants.MAX_PERSON_SPEED + 1),
 						lust:int(Math.random()*2 + 8)
 					});
+				
+				player.updatehpBar();
 				
 				
 				_playerList.push(player);
@@ -229,10 +231,10 @@ package
 			
 			_hero.setPerData({
 				life:100,
-				align:int(Math.random() * Util.Constants.MAX_PERSON_ALIGN),
-				endurance:int(Math.random() * Util.Constants.MAX_PERSON_ENDURANCE),
-				power:int(Math.random() * Util.Constants.MAX_PERSON_ATTACK),
-				speed:int(Math.random() * Util.Constants.MAX_PERSON_SPEED),
+				align:int(Math.random() * Util.Constants.MAX_PERSON_ALIGN + 1),
+				endurance:int(Math.random() * Util.Constants.MAX_PERSON_ENDURANCE + 1),
+				power:int(Math.random() * Util.Constants.MAX_PERSON_ATTACK + 1),
+				speed:int(Math.random() * Util.Constants.MAX_PERSON_SPEED + 1),
 				lust:int(Math.random() * 2 + 8),
 				isHero:true
 			});
@@ -477,22 +479,32 @@ package
 		{
 			_keyDownDict[event.keyCode] = true;
 		}
+		
+		private var mist:Bitmap;
 		/**
 		 * 刷新视野 
 		 * 
 		 */		
 		private function  _refreshLookAt():void
 		{
-			var spr:Sprite = new Sprite();
+			if(!mist)
+			{
+				mist = new Bitmap(GameSkin.mist_bitmapdata);
+				
+				this.addChild(mist);
+			}
 			
-			spr.graphics.beginFill(0,1);
-			spr.graphics.drawCircle(
-				_hero.x + _hero.width/2,
-				_hero.y + _hero.height/2 + 50,
-				LOOK_AT_RANGE);
+			mist.x = _hero.x + _hero.width/2;
+			mist.y = _hero.y + _hero.height/2 + 50;
 			
-			spr.graphics.endFill();
-//			_mapSpr.drawMask(spr);
+			//			spr.graphics.beginFill(0,1);
+			//			spr.graphics.drawCircle(
+			//				_hero.x + _hero.width/2,
+			//				_hero.y + _hero.height/2 + 50,
+			//				LOOK_AT_RANGE);
+			//			
+			//			spr.graphics.endFill();
+			_mapSpr.drawMask(mist);
 		}
 	}
 }

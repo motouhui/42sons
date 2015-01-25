@@ -2,7 +2,8 @@ package GGM.panel
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
-	import flash.text.TextField;
+	
+	import GGM.util.GetLengthLimitString;
 	
 	import Person.Person;
 	
@@ -20,6 +21,7 @@ package GGM.panel
 		{
 			txtName =new Label();
 			txtName.color = 0xffffff;
+			txtName.font = "Times New Roman";
 			this.addChild(txtName);
 			
 			txtPower = new Label();
@@ -55,7 +57,10 @@ package GGM.panel
 		{
 			this.txtPower.text = "POWER:" + player.getPower();
 			this.txtPower.color = "0xffffff";
-			this.txtName.text = player.getName();
+			this.txtName.text = GetLengthLimitString.getLengthLimitString(
+				player.getName(),
+				10,
+				2);
 			this.avatarImg.bitmapData = player.getBitmapData();
 			avatarImg.width= 25;
 			avatarImg.height = 50;
@@ -65,7 +70,6 @@ package GGM.panel
 			
 			txtPower.x =txtName.x;
 			txtPower.y = txtName.y + txtName.height + 5;
-			
 			
 		}
 		

@@ -8,7 +8,7 @@ package
     
     public class Chaos
     {
-		private static const NUMBER_OF_PLAYERS:int = 42; // !! 必须是偶数 !!
+		private static const NUMBER_OF_PLAYERS:int = 4; // !! 必须是偶数 !!
 		
         private var _mb:MicroBlog = new MicroBlog();
 		private var _uidMap:Object = new Object(); // 临时存放微博用户id的哈希表，用来去重

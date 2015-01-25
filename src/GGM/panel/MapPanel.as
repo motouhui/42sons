@@ -1,6 +1,7 @@
 package GGM.panel
 {
 	import flash.display.Bitmap;
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	
 	import GGM.skin.GameSkin;
@@ -100,7 +101,7 @@ package GGM.panel
 			}
 		}
 		
-		public function drawMask(spr:Sprite):void
+		public function drawMask(spr:DisplayObject):void
 		{
 			this.mask = spr;
 		}

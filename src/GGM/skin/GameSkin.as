@@ -8,6 +8,10 @@ package GGM.skin
 		private static const avatar:Class;
 		public static const avatar_bitmapdata:BitmapData = new avatar().bitmapData;
 		
+		[Embed(source="../../../resource/mist.png")]
+		private static const mist:Class;
+		public static const mist_bitmapdata:BitmapData = new mist().bitmapData;
+		
 		[Embed(source="../../../resource/bar.jpg")]
 		private static const playerinfoBg:Class;
 		public static const playerinfoBg_bitmapdata:BitmapData = new playerinfoBg().bitmapData;
