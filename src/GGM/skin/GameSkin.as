@@ -4,6 +4,10 @@ package GGM.skin
 
 	public class GameSkin
 	{
+		[Embed(source="../../../resource/start.png")]
+		private static const startBg:Class;
+		public static const startBg_bitmapdata:BitmapData = new startBg().bitmapData;
+		
 		[Embed(source="../../../resource/image.png")]
 		private static const avatar:Class;
 		public static const avatar_bitmapdata:BitmapData = new avatar().bitmapData;
